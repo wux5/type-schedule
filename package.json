@@ -1,0 +1,31 @@
+{
+  "name": "type-schedule",
+  "version": "0.1.0",
+  "description": "A node schedule written in typescript",
+  "main": "index.js",
+  "dependencies": {
+    "@types/lodash": "^4.14.74",
+    "@types/node": "^8.0.27",
+    "cron-parser": "^2.4.1",
+    "long-timeout": "^0.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wux5/type-schedule.git"
+  },
+  "keywords": [
+    "node",
+    "schedule",
+    "typescript"
+  ],
+  "author": "Xiaoqiong Wu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wux5/type-schedule/issues"
+  },
+  "homepage": "https://github.com/wux5/type-schedule#readme"
+}
