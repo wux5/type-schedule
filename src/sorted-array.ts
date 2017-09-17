@@ -9,7 +9,7 @@ function defaultCompare<T>(a: T, b: T) {
   return a < b ? -1 : 1;
 }
 
-export class SortedArray<T> {
+export default class SortedArray<T> {
   array: T[] = [];
   compare: IComparer<T>;
 

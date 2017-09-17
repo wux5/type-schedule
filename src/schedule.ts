@@ -1,10 +1,15 @@
-import { jobMan, ScheduleSpec, Job } from "./job";
+import { jobMan, ScheduleSpec, Job, Invocation } from "./job";
 
 export function scheduleJob(...args: any[]): Job {
-  if (args.length < 2) {
+  const argsLen = args.length;
+  if (argsLen < 2) {
     return null;
   }
-  const name = (args.length >= 3 && typeof args[0] === 'string') ? args[0] : null;
+  let name;
+  if (!(typeof args[1] === 'function' || (typeof args[1] === 'object' && typeof args[1].execute === 'function'))) {
+    // job can be a function or an object with execute() function
+    name = (typeof args[0] === 'string' ? args[0] : null);
+  }
   const sched = name ? args[1] : args[0];
   const method = name ? args[2] : args[1];
   const callback = name ? args[3] : args[2];
@@ -45,5 +50,5 @@ export function cancelJob(job: string | Job): boolean {
 
 export const scheduledJobs = jobMan.scheduledJobs;
 export { default as Range } from './range';
-export { RecurrenceRule } from './recurrence-rule';
-export { Invocation, ScheduleSpec, Job } from './job';
+export { default as RecurrenceRule } from './recurrence-rule';
+export { Job, ScheduleSpec, Invocation };

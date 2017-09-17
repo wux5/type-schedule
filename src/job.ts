@@ -1,8 +1,8 @@
 import * as CronDate from 'cron-parser/lib/date';
 import * as cronParser from "cron-parser";
-import { RecurrenceRule } from "./recurrence-rule";
+import RecurrenceRule from "./recurrence-rule";
 import { EventEmitter } from "events";
-import { SortedArray } from "./sorted-array";
+import SortedArray from "./sorted-array";
 import * as lt from "long-timeout";
 import * as util from "./util";
 

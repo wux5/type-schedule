@@ -3,7 +3,7 @@ import * as CronDate from 'cron-parser/lib/date';
 
 export type RuleData = number | string | Range | Array<number | string | Range> | null;
 
-export class RecurrenceRule {
+export default class RecurrenceRule {
   recurs: boolean = true;
   startDate: Date;
   endDate: Date;

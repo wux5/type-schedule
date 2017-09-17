@@ -1,5 +1,5 @@
 import Range from "../src/range";
-import { RecurrenceRule } from "../src/recurrence-rule";
+import RecurrenceRule from "../src/recurrence-rule";
 import { sandbox } from "sinon";
 import { expect } from "chai";
 

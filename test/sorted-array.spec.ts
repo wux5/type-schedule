@@ -1,4 +1,4 @@
-import { IComparer, SortedArray } from "../src/sorted-array";
+import SortedArray from "../src/sorted-array";
 import { expect } from "chai";
 
 describe('SortedArray class', () => {

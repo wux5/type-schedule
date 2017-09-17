@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { jobMan, Job, scheduledJobs, ScheduleObject } from "../src/job";
-import { RecurrenceRule } from "../src/recurrence-rule";
+import RecurrenceRule from "../src/recurrence-rule";
 import { sandbox } from "sinon";
 import * as moment from "moment";
 
@@ -358,6 +358,7 @@ describe('Job class', () => {
         const job = new Job(null, () => { });
         job.schedule('*/1 * * * * *'); // every second
         expect(job.nextInvocation).to.be.an('object');
+        job.cancel();
       });
     });
     context('when pending invocations is empty', () => {
@@ -365,6 +366,7 @@ describe('Job class', () => {
         const job = new Job(null, () => { });
         job.schedule('2000-1-1'); // a past date
         expect(job.nextInvocation).to.equal(null);
+        job.cancel();
       });
     });
   });
