@@ -1,2 +1,8 @@
-tsconfig.json
-src
+/*
+!/dist
+
+!/test
+!/package-lock.json
+!/package.json
+!/README.md
+!/LICENSE

@@ -1,4 +1,4 @@
-import * as schedule from '../src/schedule';
+import * as schedule from '../src/index';
 import { sandbox } from 'sinon';
 import { expect } from "chai";
 

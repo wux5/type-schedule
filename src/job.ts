@@ -1,31 +1,40 @@
 import * as CronDate from 'cron-parser/lib/date';
 import * as cronParser from "cron-parser";
+import * as lt from "long-timeout";
+import * as util from "./util";
 import RecurrenceRule from "./recurrence-rule";
 import { EventEmitter } from "events";
 import SortedArray from "./sorted-array";
-import * as lt from "long-timeout";
-import * as util from "./util";
 
 export type InvocationArray = SortedArray<Invocation>;
 /**
- * Sorter function used to sort items in scheduled jobs
+ * Sorter function to sort scheduled invocations by date/time
  * 
  * @param {Invocation} a - invocation
  * @param {Invocation} b - another invocation
- * @returns {number} - difference between the time of 2 invocations
+ * @returns {number} - difference between the fire date of 2 invocations
  */
 function invocationSorter(a: Invocation, b: Invocation): number {
   return a.fireDate.getTime() - b.fireDate.getTime();
 }
 
+/**
+ * Singleton Job Manager class that manage job invocations
+ */
 export class JobManager {
+  private static _instance: JobManager;
   // anonymous job counter
   anonJobCounter = 0;
   // active invocations of all jobs
   invocations: InvocationArray = new SortedArray<Invocation>([], invocationSorter);
   // current invocation
   currentInvocation: Invocation = null;
+  // scheduled jobs
   scheduledJobs: Object = {};
+
+  static get instance(): JobManager {
+    return this._instance || (this._instance = new this());
+  }
 
   cancelInvocation(invocation: Invocation) {
     if (this.invocations.remove(invocation)) {
@@ -109,7 +118,7 @@ export class JobManager {
   }
 }
 
-export const jobMan = new JobManager();
+export const jobMan = JobManager.instance;
 export const scheduledJobs = jobMan.scheduledJobs;
 export class Invocation {
   job: Job;

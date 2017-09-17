@@ -1,8 +1,12 @@
 {
   "name": "type-schedule",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "A node schedule written in typescript",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "engines": {
+    "node": ">=4.2"
+  },
   "dependencies": {
     "@types/lodash": "^4.14.74",
     "@types/node": "^8.0.27",
@@ -14,7 +18,10 @@
     "@types/mocha": "^2.2.43",
     "@types/sinon": "^2.3.3",
     "chai": "^4.1.2",
+    "coveralls": "^2.13.1",
     "mocha": "^3.5.0",
+    "mocha-lcov-reporter": "^1.3.0",
+    "moment": "^2.18.1",
     "nyc": "^11.2.1",
     "sinon": "^3.2.1",
     "source-map-support": "^0.4.17",
@@ -22,7 +29,9 @@
     "typescript": "^2.5.2"
   },
   "scripts": {
-    "test": "nyc mocha test/**/*.spec.ts"
+    "t": "mocha test/**/*.spec.ts",
+    "co": "nyc npm run t",
+    "test": "npm run co && nyc report --reporter=text-lcov | coveralls"
   },
   "nyc": {
     "extension": [
