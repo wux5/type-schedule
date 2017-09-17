@@ -16,7 +16,7 @@ describe('SortedArray class', () => {
             return 0;
           }
           return a < b ? 1 : -1;
-        }
+        };
         const array = new SortedArray([2, 1, 3, 5, 4, 3], compare);
         expect(array.array).to.eql([5, 4, 3, 3, 2, 1]);
       });
@@ -59,6 +59,19 @@ describe('SortedArray class', () => {
         array.remove(6);
         expect(array.array).to.eql([1, 2, 3, 4, 5]);
       });
+    });
+  });
+  describe('.length', () => {
+    it('should return the length of the array', () => {
+      const array = new SortedArray([1, 2, 3, 4, 5]);
+      expect(array.length).to.equal(5);
+    });
+  });
+  describe('.clear', () => {
+    it('should empty the array', () => {
+      const array = new SortedArray([1, 2, 3, 4, 5]);
+      array.clear();
+      expect(array.length).to.equal(0);
     });
   });
 });

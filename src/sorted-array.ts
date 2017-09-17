@@ -1,5 +1,5 @@
-export interface IComparer {
-  <T>(a: T, b: T): number;
+export interface IComparer<T> {
+  (a: T, b: T): number;
 }
 
 function defaultCompare<T>(a: T, b: T) {
@@ -9,11 +9,11 @@ function defaultCompare<T>(a: T, b: T) {
   return a < b ? -1 : 1;
 }
 
-export class SortedArray {
-  array: Array<any> = [];
-  compare: IComparer;
+export class SortedArray<T> {
+  array: T[] = [];
+  compare: IComparer<T>;
 
-  constructor(array: Array<any>, compare?: IComparer) {
+  constructor(array: T[], compare?: IComparer<T>) {
     this.compare = compare || defaultCompare;
 
     const length: number = array.length;
@@ -23,10 +23,10 @@ export class SortedArray {
     }
   }
 
-  insert<T>(element: T): SortedArray {
-    const array: Array<T> = this.array;
+  insert(element: T): SortedArray<T> {
+    const array: T[] = this.array;
     const length: number = array.length;
-    const compare: IComparer = this.compare;
+    const compare: IComparer<T> = this.compare;
     let index: number = length - 1;
 
     while (index >= 0) {
@@ -40,9 +40,9 @@ export class SortedArray {
     return this;
   }
 
-  search<T>(element: T): number {
-    const array: Array<T> = this.array;
-    const compare: IComparer = this.compare;
+  search(element: T): number {
+    const array: T[] = this.array;
+    const compare: IComparer<T> = this.compare;
     let low: number = 0;
     let high: number = array.length;
     if (high > 0) {
@@ -66,11 +66,20 @@ export class SortedArray {
     return -1;
   }
 
-  remove<T>(element: T): SortedArray {
+  remove(element: T): boolean {
     const index = this.search(element);
     if (index > -1) {
       this.array.splice(index, 1);
+      return true;
     }
-    return this;
+    return false;
+  }
+
+  get length(): number {
+    return this.array.length;
+  }
+
+  clear() {
+    this.array = [];
   }
 }

@@ -5,15 +5,17 @@ export type RuleData = number | string | Range | Array<number | string | Range> 
 
 export class RecurrenceRule {
   recurs: boolean = true;
-  year: RuleData = null;
-  month: RuleData = null;
-  date: RuleData = null;
-  dayOfWeek: RuleData = null;
-  hour: RuleData = null;
-  minute: RuleData = null;
+  startDate: Date;
+  endDate: Date;
+  year: RuleData;
+  month: RuleData;
+  date: RuleData;
+  dayOfWeek: RuleData;
+  hour: RuleData;
+  minute: RuleData;
   second: RuleData = 0;
 
-  constructor(year: RuleData = null, month: RuleData = null, date: RuleData | Range = null, dayOfWeek: RuleData = null, hour: RuleData = null, minute: RuleData = null, second: number = 0) {
+  constructor(year: RuleData = null, month: RuleData = null, date: RuleData | Range = null, dayOfWeek: RuleData = null, hour: RuleData = null, minute: RuleData = null, second: number = 0, start: Date = null, end: Date = null) {
     this.year = year;
     this.month = month;
     this.date = date;
@@ -21,6 +23,8 @@ export class RecurrenceRule {
     this.hour = hour;
     this.minute = minute;
     this.second = second || 0;
+    this.startDate = start;
+    this.endDate = end;
   }
 
   isValid(): boolean {

@@ -1,41 +1,49 @@
-import * as cronParser from 'cron-parser';
-import * as CronDate from 'cron-parser/lib/date';
-import * as lt from 'long-timeout';
-import { EventEmitter } from "events";
-import { IComparer, SortedArray } from './sorted-array';
+import { jobMan, ScheduleSpec, Job } from "./job";
 
-export let anonJobCounter: number;
-// export const scheduledJobs: Array<Job> = [];
+export function scheduleJob(...args: any[]): Job {
+  if (args.length < 2) {
+    return null;
+  }
+  const name = (args.length >= 3 && typeof args[0] === 'string') ? args[0] : null;
+  const sched = name ? args[1] : args[0];
+  const method = name ? args[2] : args[1];
+  const callback = name ? args[3] : args[2];
 
-function isValidDate(date: CronDate): boolean {
-  return !isNaN(date.getTime());
+  const job = new Job(name, method, callback);
+  if (job.schedule(sched)) {
+    return job;
+  }
+  return null;
 }
 
+export function rescheduleJob(job: string | Job, sched: ScheduleSpec): Job {
+  if (job instanceof Job) {
+    if (job.reschedule(sched)) {
+      return job;
+    }
+  } else if (typeof job === 'string') {
+    if (job in jobMan.scheduledJobs && jobMan.scheduledJobs.hasOwnProperty(job)) {
+      if (jobMan.scheduledJobs[job].reschedule(sched)) {
+        return jobMan.scheduledJobs[job];
+      }
+    }
+  }
+  return null;
+}
 
-// export class Invocation {
-//   job: Job;
-//   fireDate: CronDate;
-//   endDate?: CronDate;
-//   recurrenceRule: RecurrenceRule;
-// }
+export function cancelJob(job: string | Job): boolean {
+  if (job instanceof Job) {
+    return job.cancel();
+  }
+  if (typeof job === 'string') {
+    if (job in jobMan.scheduledJobs && jobMan.scheduledJobs.hasOwnProperty(job)) {
+      return jobMan.scheduledJobs[job].cancel();
+    }
+  }
+  return false;
+}
 
-// export class Job extends EventEmitter {
-//   name: string;
-//   private job: Function;
-//   private callback: Function;
-//   // private pendingInvocation: Invocation[];
-
-//   constructor(name: string, job: Function, callback: Function) {
-//     super();
-//     this.name = name;
-//     this.job = job;
-//     this.callback = callback;
-
-//     // this.pendingInvocation = [];
-//   }
-
-//   start() {
-//     setInterval(this.job.bind(this), 1000);
-//   }
-// }
-
+export const scheduledJobs = jobMan.scheduledJobs;
+export { default as Range } from './range';
+export { RecurrenceRule } from './recurrence-rule';
+export { Invocation, ScheduleSpec, Job } from './job';
