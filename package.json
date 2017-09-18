@@ -1,6 +1,6 @@
 {
   "name": "type-schedule",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A node schedule written in typescript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,14 +8,14 @@
     "node": ">=4.2"
   },
   "dependencies": {
-    "@types/lodash": "^4.14.74",
-    "@types/node": "^8.0.27",
     "cron-parser": "^2.4.1",
     "long-timeout": "^0.1.1"
   },
   "devDependencies": {
     "@types/chai": "^4.0.4",
+    "@types/lodash": "^4.14.74",
     "@types/mocha": "^2.2.43",
+    "@types/node": "^8.0.27",
     "@types/sinon": "^2.3.3",
     "chai": "^4.1.2",
     "coveralls": "^2.13.1",

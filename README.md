@@ -1,4 +1,5 @@
 # Type Schedule
+[![NPM version](http://img.shields.io/npm/v/type-schedule.svg)](https://www.npmjs.com/package/type-schedule)
 [![Build Status](https://travis-ci.org/wux5/type-schedule.svg?branch=master)](https://travis-ci.org/wux5/type-schedule)
 [![Coverage Status](https://coveralls.io/repos/github/wux5/type-schedule/badge.svg?branch=master)](https://coveralls.io/github/wux5/type-schedule?branch=master)
 
