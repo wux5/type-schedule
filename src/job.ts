@@ -133,7 +133,7 @@ export class Invocation {
     this.recurrenceRule = rule;
   }
 }
-export interface JobObject {
+export interface IJobObject {
   execute();
 }
 export class ScheduleObject {
@@ -178,10 +178,10 @@ export class Job extends EventEmitter {
     return ++this._triggeredJobs;
   }
 
-  job: Function | JobObject;
+  job: Function | IJobObject;
   callback: Function;
 
-  constructor(name?: string, job?: Function | JobObject, callback?: Function) {
+  constructor(name?: string, job?: Function | IJobObject, callback?: Function) {
     super();
 
     this._name = name || `<Anonymous Job ${++jobMan.anonJobCounter}>`;

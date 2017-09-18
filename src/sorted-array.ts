@@ -2,7 +2,7 @@ export interface IComparer<T> {
   (a: T, b: T): number;
 }
 
-function defaultCompare<T>(a: T, b: T) {
+function defaultCompare<T>(a: T, b: T):number {
   if (a === b) {
     return 0;
   }

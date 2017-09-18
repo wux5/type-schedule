@@ -303,4 +303,18 @@ describe('RecurrenceRule class', () => {
       expect(next2).to.eql(null);
     });
   });
+  describe('#from', () => {
+    it('should create a RecurrenceRule from an object', () => {
+      const rule = RecurrenceRule.from({
+        year: 2020,
+        month: 1,
+        date: 10,
+        dayOfWeek: 5,
+        hour: 10,
+        minute: 59,
+        second: 1
+      });
+      expect(rule).to.eql(new RecurrenceRule(2020, 1, 10, 5, 10, 59, 1));
+    });
+  });
 });

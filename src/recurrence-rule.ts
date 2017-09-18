@@ -5,8 +5,6 @@ export type RuleData = number | string | Range | Array<number | string | Range> 
 
 export default class RecurrenceRule {
   recurs: boolean = true;
-  startDate: Date;
-  endDate: Date;
   year: RuleData;
   month: RuleData;
   date: RuleData;
@@ -23,8 +21,16 @@ export default class RecurrenceRule {
     this.hour = hour;
     this.minute = minute;
     this.second = second || 0;
-    this.startDate = start;
-    this.endDate = end;
+  }
+
+  static from(obj: object): RecurrenceRule {
+    const rule = new this();
+    ['year', 'month', 'date', 'dayOfWeek', 'hour', 'minute', 'second'].forEach(prop => {
+      if (prop in obj) {
+        rule[prop] = obj[prop];
+      }
+    });
+    return rule;
   }
 
   isValid(): boolean {
