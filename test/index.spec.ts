@@ -127,4 +127,19 @@ describe('schedule', () => {
       clock.tick(3250);
     });
   });
+  describe('.runNow', () => {
+    it('should invoke the specified job now', () => {
+      const job = schedule.scheduleJob('test-job', '*/1 * * * *', spy);
+      schedule.runNow(job);
+      expect(spy.callCount).to.equal(1);
+      schedule.runNow('test-job');
+      expect(spy.callCount).to.equal(2);
+      job.cancel();
+    });
+    it('should throw exception if specified job is not scheduled', () => {
+      expect(() => {
+        schedule.runNow('not-exist-job');
+      }).to.throw();
+    });
+  });
 });

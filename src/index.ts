@@ -48,6 +48,18 @@ export function cancelJob(job: string | Job): boolean {
   return false;
 }
 
+export function runNow(job: string | Job): void {
+  if (job instanceof Job) {
+    job.invoke();
+  } else {
+    if (job in jobMan.scheduledJobs && jobMan.scheduledJobs.hasOwnProperty(job)) {
+      jobMan.scheduledJobs[job].invoke();
+    } else {
+      throw new Error(`No job with name '${job}' scheduled.`);
+    }
+  }
+}
+
 export const scheduledJobs = jobMan.scheduledJobs;
 export { default as Range } from './range';
 export { default as RecurrenceRule } from './recurrence-rule';

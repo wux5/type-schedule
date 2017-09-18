@@ -5,8 +5,8 @@
 Rewrite of the awesome [node-schedule](https://github.com/node-schedule/node-schedule) in TypeScript, with enhancements:
 * Job name uniqueness is checked ([#370](https://github.com/node-schedule/node-schedule/issues/370))
 * Canceling job by name will properly cancel all invocations ([#368](https://github.com/node-schedule/node-schedule/issues/369))
-* Support run scheduled job NOW.
-* Type checking by TypeScript.
-* More tests.
+* Support run scheduled job NOW
+* Type checking by TypeScript
+* More tests
 
-The project still need some work to be really compatible with [node-schedule](https://github.com/node-schedule/node-schedule). More refactoring to come as this is my first TypeScript project.
+The project still need some work to be really compatible with [node-schedule](https://github.com/node-schedule/node-schedule).
