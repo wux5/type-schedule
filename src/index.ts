@@ -1,18 +1,18 @@
-import { jobMan, ScheduleSpec, Job, Invocation } from "./job";
+import { jobMan, ScheduleSpec, Job, Invocation, IJobObject } from "./job";
 
 export function scheduleJob(...args: any[]): Job {
   const argsLen = args.length;
   if (argsLen < 2) {
     return null;
   }
-  let name;
+  let name: string;
   if (!(typeof args[1] === 'function' || (typeof args[1] === 'object' && typeof args[1].execute === 'function'))) {
     // job can be a function or an object with execute() function
     name = (typeof args[0] === 'string' ? args[0] : null);
   }
-  const sched = name ? args[1] : args[0];
-  const method = name ? args[2] : args[1];
-  const callback = name ? args[3] : args[2];
+  const sched: ScheduleSpec = name ? args[1] : args[0];
+  const method: Function | IJobObject = name ? args[2] : args[1];
+  const callback: Function = name ? args[3] : args[2];
 
   const job = new Job(name, method, callback);
   if (job.schedule(sched)) {

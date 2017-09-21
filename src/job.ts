@@ -134,7 +134,7 @@ export class Invocation {
   }
 }
 export interface IJobObject {
-  execute();
+  execute(): void;
 }
 export class ScheduleObject {
   start?: Date;
